@@ -39,12 +39,15 @@ export default function Home() {
       if (resp.ok) {
         const data = await resp.json();
         setResult(data);
-      } else {
+      }
+      else {
         alert("Error matching resume.");
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.log(error);
-    } finally {
+    }
+    finally {
       setLoading(false);
     }
   }
@@ -56,11 +59,14 @@ export default function Home() {
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-8">
+
         {/* Resume Upload */}
         <div className="max-w-sm">
+
           <Label htmlFor="resume" className="mb-2 block text-lg font-semibold">
             Upload Resume (PDF)
           </Label>
+
           <Input
             id="resume"
             type="file"
@@ -77,9 +83,11 @@ export default function Home() {
 
         {/* Job Description */}
         <div>
+
           <Label htmlFor="jobDesc" className="mb-2 block text-lg font-semibold">
             Job Description
           </Label>
+
           <Textarea
             id="jobDesc"
             rows={8}

@@ -8,23 +8,26 @@ const openai = new OpenAI({
 });
 
 async function extractTextFromPdf(buffer: Buffer): Promise<string> {
+
   return new Promise((resolve, reject) => {
+
     const pdfParser = new PDFParser();
 
     pdfParser.on("pdfParser_dataError", (err: any) => reject(err));
     pdfParser.on("pdfParser_dataReady", (pdfData: any) => {
-      // pdfData form has Pages -> Texts arrays
-      let fullText = "";
 
-      for (const page of pdfData.Pages) {
-        for (const textItem of page.Texts) {
-          // Decode percent-encoded text and join
-          fullText += decodeURIComponent(textItem.R[0].T) + " ";
+        // pdfData form has Pages -> Texts arrays
+        let fullText = "";
+
+        for (const page of pdfData.Pages) {
+            for (const textItem of page.Texts) {
+                // Decode percent-encoded text and join
+                fullText += decodeURIComponent(textItem.R[0].T) + " ";
+            }
+            fullText += "\n";
         }
-        fullText += "\n";
-      }
 
-      resolve(fullText.trim());
+        resolve(fullText.trim());
     });
 
     pdfParser.parseBuffer(buffer);
@@ -112,6 +115,7 @@ Respond with ONLY JSON like this:
 }
 
 export async function POST(req: NextRequest) {
+
   try {
     // Use Web API FormData to parse multipart form data
     const formData = await req.formData();
