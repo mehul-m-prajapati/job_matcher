@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <main className="max-w-3xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-8 text-center">
-        Job Description Matcher
+        Job Matcher
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-8">
